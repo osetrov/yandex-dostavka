@@ -7,6 +7,6 @@ production:
 development:
   <<: *defaults
   API_ENDPOINT: "https://b2b.taxi.tst.yandex.net"
-    YANDEX_DOSTAVKA_TOKEN: "AgAAAADzeAQMAAAPeISvM_9LUkxCijQoFXOH5QE"
+  YANDEX_DOSTAVKA_TOKEN: "AgAAAADzeAQMAAAPeISvM_9LUkxCijQoFXOH5QE"
 test:
   <<: *defaults
