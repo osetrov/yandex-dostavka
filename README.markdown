@@ -167,7 +167,7 @@ body = {
                         from: DateTime.now.to_i,
                         to: DateTime.tomorrow.to_datetime.to_i
                 },
-                "type": "custom_location"
+                type: "custom_location"
         },
         info: {
                 comment: "Позвонить за час",
@@ -175,7 +175,7 @@ body = {
         },
         items: [
                 {
-                        "article": "55185",
+                        article: "55185",
                         billing_details: {
                                 assessed_unit_price: 237900,
                                 unit_price: 237900
@@ -208,13 +208,62 @@ body = {
         }
 }
 response = YandexDostavka::Request.offers("create").create(body: body)
-
 ```
 ### <a name="api_b2b_platform_offers_confirm_post"></a> [Подтверждение заявки](https://yandex.ru/dev/logistics/delivery-api/doc/ref/part3/api_b2b_platform_offers_confirm_post.html)
+```ruby
+body = {
+        offer_id: "1"
+}
+response = YandexDostavka::Request.offers.confirm.create(body: body)
+```
 ### <a name="api_b2b_platform_request_info_get"></a> [Получение информации о заявке](https://yandex.ru/dev/logistics/delivery-api/doc/ref/part3/api_b2b_platform_request_info_get.html)
+```ruby
+response = YandexDostavka::Request.request.info.retrieve(params: {request_id: "873113ce-819a-4a73-b500-dce9dae82299"})
+```
 ### <a name="api_b2b_platform_requests_info_get"></a> [Получение информации о заявках во временном интервале](https://yandex.ru/dev/logistics/delivery-api/doc/ref/part3/api_b2b_platform_requests_info_get.html)
+```ruby
+params = {
+        from: (DateTime.now - 7.day).to_i,
+        to: DateTime.now.to_i
+}
+response = YandexDostavka::Request.requests.info.retrieve(params: params)
+```
 ### <a name="api_b2b_platform_request_history_get"></a> [История статусов заявки](https://yandex.ru/dev/logistics/delivery-api/doc/ref/part3/api_b2b_platform_request_history_get.html)
+```ruby
+response = YandexDostavka::Request.request.history.retrieve(params: {request_id: "873113ce-819a-4a73-b500-dce9dae82299"})
+```
 ### <a name="api_b2b_platform_request_cancel_post"></a> [Отмена заявки](https://yandex.ru/dev/logistics/delivery-api/doc/ref/part3/api_b2b_platform_request_cancel_post.html)
+```ruby
+response = YandexDostavka::Request.request.cancel.create(body: {request_id: "873113ce-819a-4a73-b500-dce9dae82299"})
+```
 ## <a name="part4"></a> [Ярлыки и акты приема-передачи](https://yandex.ru/dev/logistics/delivery-api/doc/ref/part4.html)
 ### <a name="api_b2b_platform_request_generate-labels_post"></a> [Получение ярлыков](https://yandex.ru/dev/logistics/delivery-api/doc/ref/part4/api_b2b_platform_request_generate-labels_post.html)
+```ruby
+body = {
+        generate_type: "many",
+        request_ids: [
+                "873113ce-819a-4a73-b500-dce9dae82299"
+        ]
+}
+
+```
 ### <a name="api_b2b_platform_request_get-handover-act_post"></a> [Получение актов приёма-передачи для отгрузки](https://yandex.ru/dev/logistics/delivery-api/doc/ref/part4/api_b2b_platform_request_get-handover-act_post.html)
+```ruby
+params = {
+        editable_format: true,
+        new_requests: true,
+        created_since: 1643711508,
+        created_until: 1644489108,
+        created_since_utc: "2021-10-25T15:00:0.000000Z",
+        created_until_utc: "2021-10-25T17:00:0.000000Z",
+        request_ids: "873113ce-819a-4a73-b500-dce9dae82299,dbc17cb3-d3de-48e2-9f7f-b4ff23095df7",
+        request_code: "my_request_id_123"
+}
+body = {
+        request_ids: [
+                "873113ce-819a-4a73-b500-dce9dae82299",
+                "dbc17cb3-d3de-48e2-9f7f-b4ff23095df7"
+        ]
+}
+response = YandexDostavka::Request.request.get_handover_act.create(params: params, body: body)
+```
