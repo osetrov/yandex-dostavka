@@ -1,6 +1,5 @@
 defaults: &defaults
   API_ENDPOINT: "https://b2b.taxi.tst.yandex.net"
-  YANDEX_DOSTAVKA_TOKEN: "***"
 production:
   <<: *defaults
   API_ENDPOINT: "https://b2b-authproxy.taxi.yandex.net"
@@ -8,5 +7,6 @@ production:
 development:
   <<: *defaults
   API_ENDPOINT: "https://b2b.taxi.tst.yandex.net"
+    YANDEX_DOSTAVKA_TOKEN: "AgAAAADzeAQMAAAPeISvM_9LUkxCijQoFXOH5QE"
 test:
   <<: *defaults
