@@ -8,7 +8,7 @@ YandexDostavka.setup do |config|
       config::register k.underscore.to_sym, v
     end
 
-    config::Request.token ||= ENV['YANDEX_DOSTAVKA_TOKEN']
+    config::Request.token = YandexDostavka.token || ENV['YANDEX_DOSTAVKA_TOKEN']
 
     config::Request.timeout = 60
     config::Request.open_timeout = 60

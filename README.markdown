@@ -1,6 +1,6 @@
 # Yandex Dostavka API
 
-API wrapper для Yandex Dostavka API
+API wrapper для [Yandex Dostavka API](https://yandex.ru/dev/logistics/delivery-api/doc/about/intro.html)
 
 # Оглавление
 0. [Установка](#install)
@@ -41,10 +41,10 @@ API wrapper для Yandex Dostavka API
 Сначала создайте экземпляр объекта `YandexDostavka::Request`:
 
 ```ruby
-dostavka = YandexDostavka::Request.new(api_key: "***")
+dostavka = YandexDostavka::Request.new(token: "***")
 ```
 
-Вы можете изменять `api_key`, `timeout`, `open_timeout`, `faraday_adapter`, `proxy`, `symbolize_keys`, `logger`, и `debug`:
+Вы можете изменять `token`, `timeout`, `open_timeout`, `faraday_adapter`, `proxy`, `symbolize_keys`, `logger`, и `debug`:
 
 ```ruby
 YandexDostavka::Request.timeout = 15
@@ -52,7 +52,7 @@ YandexDostavka::Request.open_timeout = 15
 YandexDostavka::Request.symbolize_keys = true
 YandexDostavka::Request.debug = false
 
-YandexDostavka::Request.api_key = "your_api_key"
+YandexDostavka::Request.token = "your_token"
 ```
 
 Либо в файле `config/initializers/yandex_dostavka.rb` для Rails.
@@ -62,7 +62,7 @@ YandexDostavka::Request.api_key = "your_api_key"
 Измените `debug: true` чтобы включить логирование в STDOUT.
 
 ```ruby
-dostavka = YandexDostavka::Request.new(api_key: "***", debug: true)
+dostavka = YandexDostavka::Request.new(token: "***", debug: true)
 ```
 
 ### <a name="custom_logger"></a> Custom logger
@@ -70,7 +70,7 @@ dostavka = YandexDostavka::Request.new(api_key: "***", debug: true)
 `Logger.new` используется по умолчанию, но вы можете изменить на свой:
 
 ```ruby
-dostavka = YandexDostavka::Request.new(api_key: "***", debug: true, logger: MyLogger.new)
+dostavka = YandexDostavka::Request.new(token: "***", debug: true, logger: MyLogger.new)
 ```
 
 Или:
@@ -80,3 +80,21 @@ YandexDostavka::Request.logger = MyLogger.new
 ```
 
 # <a name="examples"></a> Примеры
+
+
+```ruby
+body = { 
+        client_price: 10000,
+        destination: {
+                address: "Санкт-Петербург, ул. Академика Павлова, д. 5"
+        },
+        payment_method: "already_paid",
+        source: {
+                address: "Санкт-Петербург, ул. Профессора Попова, д. 38"
+        },
+        tariff: "time_interval",
+        total_assessed_price: 10000,
+        total_weight: 1000
+}
+YandexDostavka::Request.pricing_calculator.create(body: body)
+```

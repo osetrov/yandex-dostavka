@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.email       = 'pavel.osetrov@me.com'
   s.files = Dir['lib/**/*', 'LICENSE', 'README.markdown']
 
-  s.homepage    = 'https://yandex.ru/dev/logistics/delivery-api/doc/ref/part3/api_b2b_platform_offers_create_post.html'
+  s.homepage    = 'https://github.com/osetrov/yandex-dostavka'
   s.license       = 'MIT'
 
   s.add_dependency('faraday', '>= 2.0.0')
