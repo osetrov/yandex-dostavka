@@ -34,6 +34,7 @@ API wrapper для [Yandex Dostavka API](https://yandex.ru/dev/logistics/deliver
 2. В разделе Токен для API нажмите Получить.
 3. На странице https://oauth.yandex.ru нажмите Разрешить.
 4. В Кабинете Корпоративного Клиента Яндекс Доставки на вкладке Профиль компании в разделе Токен для API будет отображен ваш OAuth-токен.
+5. Получите station id у менеджера.
 
 ## Ruby
     $ gem install yandex-dostavka
@@ -118,7 +119,7 @@ pricing_total = response.body[:pricing_total]
 ### <a name="api_b2b_platform_offers_info_get"></a> [Получение интервалов доставки](https://yandex.ru/dev/logistics/delivery-api/doc/ref/part1/api_b2b_platform_offers_info_get.html)
 ```ruby
 params = {
-        station_id: "03840f16-3c53-400c-b382-1ecf30e06b64",
+        station_id: YandexDostavka.station_id,
         full_address: "Санкт-Петербург, Професора Попова, 38",
         geo_id: 2
 }

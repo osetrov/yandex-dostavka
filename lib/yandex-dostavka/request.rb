@@ -62,7 +62,7 @@ module YandexDostavka
       reset
     end
 
-    def retrieve(params: nil, headers: nil, body: {})
+    def retrieve(params: nil, headers: nil, body: nil)
       APIRequest.new(builder: self).get(params: params, headers: headers, body: body)
     ensure
       reset

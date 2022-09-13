@@ -5,10 +5,10 @@ module YandexDostavka
       @request_builder = builder
     end
 
-    def post(params: nil, headers: nil, suffix: nil, body: {})
+    def post(params: nil, headers: nil, body: {})
       validate_api_key
       begin
-        response = self.rest_client(suffix).post do |request|
+        response = self.rest_client.post do |request|
           configure_request(request: request, params: params, headers: headers, body: body)
         end
         parse_response(response)
@@ -17,7 +17,7 @@ module YandexDostavka
       end
     end
 
-    def get(params: nil, headers: nil, body: {})
+    def get(params: nil, headers: nil, body: nil)
       validate_api_key
 
       begin
@@ -110,8 +110,8 @@ module YandexDostavka
       end
     end
 
-    def rest_client(suffix=nil)
-      client = Faraday.new("#{self.api_url}#{suffix.present? ? "/#{suffix}": ""}", proxy: self.proxy,
+    def rest_client
+      client = Faraday.new("#{self.api_url}", proxy: self.proxy,
                            ssl: self.ssl_options) do |faraday|
         faraday.request :gzip
         faraday.response :raise_error

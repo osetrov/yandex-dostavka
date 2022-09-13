@@ -4,9 +4,11 @@ production:
   <<: *defaults
   API_ENDPOINT: "https://b2b-authproxy.taxi.yandex.net"
   YANDEX_DOSTAVKA_TOKEN: "***"
+  STATION_ID: "***"
 development:
   <<: *defaults
   API_ENDPOINT: "https://b2b.taxi.tst.yandex.net"
   YANDEX_DOSTAVKA_TOKEN: "AgAAAADzeAQMAAAPeISvM_9LUkxCijQoFXOH5QE"
+  STATION_ID: "7c4054cd-d768-4062-8f8d-d0c9b3c8c4e8"
 test:
   <<: *defaults
