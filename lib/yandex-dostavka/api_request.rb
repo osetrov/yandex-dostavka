@@ -76,9 +76,14 @@ module YandexDostavka
           error_params[:status_code] = error.response[:status]
           error_params[:raw_body] = error.response[:body]
 
-          parsed_response = MultiJson.load(error.response[:body], symbolize_keys: symbolize_keys)
+          io = StringIO.new(error.response[:body])
+          gzip_reader = Zlib::GzipReader.new(io, encoding: 'ASCII-8BIT')
+          body = gzip_reader.read
+
+          parsed_response = MultiJson.load(body, symbolize_keys: symbolize_keys)
 
           if parsed_response
+
             error_params[:body] = parsed_response
 
             title_key = symbolize_keys ? :title : "title"
